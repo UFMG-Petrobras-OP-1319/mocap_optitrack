@@ -180,6 +180,12 @@ namespace mocap_optitrack
         {
           serverDescription.enableOptitrack = param.as_bool();
         }
+        else if (param.get_name().rfind("qos_overrides.", 0) == 0)
+        {
+          // Since Humble, publishers created with QoS overriding options (e.g. the
+          // TF broadcaster) declare read-only qos_overrides.* parameters on this
+          // node. Accept them: rejecting one throws and kills the node.
+        }
         else
         {
           result.successful = false;
